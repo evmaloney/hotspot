@@ -6,3 +6,4 @@ urlpatterns = [
   path('about/', views.about, name="about"),
   path('spots/', views.spots_index, name="index"),
 ]
+abc

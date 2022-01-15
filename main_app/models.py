@@ -1,4 +1,3 @@
-import imp
 from django.db import models
 from django.urls import reverse
 from datetime import date
@@ -14,14 +13,14 @@ TYPES = (
 
 # Create your models here.
 class Spot(models.Model):
-    location = models.CharField(max_length=100)
+    address = models.CharField(max_length=150)
     type = models.CharField(
         max_length=15,
         choices=TYPES,
         default=TYPES[3][0]
     )
     price = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.location
+        return self.address

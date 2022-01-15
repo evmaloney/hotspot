@@ -41,9 +41,16 @@ class Spot(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'spot_id': self.id})
 
-class Bookings(models.Model):
+class Booking(models.Model):
     startdate = models.DateField('start date')
     enddate = models.DateField('end date')
+    spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.startdate} - {self.enddate}'
+    
+    class Meta:
+        ordering = ['-startdate']
 
 class Photo(models.Model):
     url = models.CharField(max_length=200)
@@ -51,3 +58,4 @@ class Photo(models.Model):
 
     def __str__(self):
         return f"Photo for spot_id: {self.spot_id} @{self.url}"
+        

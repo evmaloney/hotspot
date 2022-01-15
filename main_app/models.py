@@ -31,7 +31,7 @@ class Spot(models.Model):
         default=TYPES[3][0]
     )
     price = models.IntegerField()
-    description = models.CharField(max_length=250)
+    description = models.CharField(max_length=300)
     Features = models.ManyToManyField(Feature)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

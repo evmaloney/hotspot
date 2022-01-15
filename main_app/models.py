@@ -15,7 +15,7 @@ TYPES = (
 
 # Create your models here.
 class Spot(models.Model):
-    address = models.CharField(max_length=100)
+    address = models.CharField(max_length=150)
     type = models.CharField(
         max_length=15,
         choices=TYPES,

@@ -5,13 +5,13 @@ from django.urls import reverse
 from datetime import date
 from django.contrib.auth.models import User 
 
-TYPES = (
-    ('Driveway', 'Driveway'),
-    ('Lot', 'Lot'),
-    ('Garage', 'Garage'),
-    ('Street', 'Street'),
-    ('Other', 'Other')
-)
+# TYPES = (
+#     ('Driveway', 'Driveway'),
+#     ('Lot', 'Lot'),
+#     ('Garage', 'Garage'),
+#     ('Street', 'Street'),
+#     ('Other', 'Other')
+# )
 
 class Feature(models.Model):
     name = models.CharField(max_length=100)
@@ -25,14 +25,10 @@ class Feature(models.Model):
 # Create your models here.
 class Spot(models.Model):
     address = models.CharField(max_length=150)
-    type = models.CharField(
-        max_length=15,
-        choices=TYPES,
-        default=TYPES[3][0]
-    )
+    type = models.CharField(max_length=100)
     price = models.IntegerField()
-    description = models.CharField(max_length=300)
-    Features = models.ManyToManyField(Feature)
+    description = models.TextField(max_length=300)
+    features = models.ManyToManyField(Feature)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -52,10 +48,10 @@ class Booking(models.Model):
     class Meta:
         ordering = ['-startdate']
 
-class Photo(models.Model):
-    url = models.CharField(max_length=200)
-    spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
+# class Photo(models.Model):
+#     url = models.CharField(max_length=200)
+#     spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f"Photo for spot_id: {self.spot_id} @{self.url}"
+#     def __str__(self):
+#         return f"Photo for spot_id: {self.spot_id} @{self.url}"
         

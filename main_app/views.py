@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Spot, Feature, Photo
+from .models import Spot, Feature
 from .forms import BookingForm
 import uuid
 import boto3
@@ -14,7 +14,7 @@ import os
 
 # Create your views here.
 def home(request):
-  return render(request, 'home')
+  return render(request, 'home.html')
 
 def about(request):
   return render(request, 'about.html')
@@ -88,7 +88,7 @@ class SpotCreate(LoginRequiredMixin, CreateView):
 class SpotUpdate(LoginRequiredMixin, UpdateView):
   model = Spot
   # Let's dissallow the renaming of a cat by excluding the name field!
-  fields = ['breed', 'description', 'age']
+  fields = ['type', 'price', 'description']
 
 class SpotDelete(LoginRequiredMixin, DeleteView):
   model = Spot

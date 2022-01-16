@@ -5,7 +5,7 @@
 
 {% for spot in spots %}
   <div class="card">
-    <a href="/spots/{{ url 'detail' spot.id }}"></a>
+    <a href="{% url 'detail' spot.id %}">
       <div class="card-content">
         <span class="card-title">{{ spot.address }}</span>
         <p>Type: {{ spot.type }}</p>

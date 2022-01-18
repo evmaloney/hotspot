@@ -38,15 +38,15 @@ class Spot(models.Model):
         return reverse('detail', kwargs={'spot_id': self.id})
 
 class Booking(models.Model):
-    startdate = models.DateField('start date')
-    enddate = models.DateField('end date')
+    date = models.DateField('date')
     spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
-
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     def __str__(self):
-        return f'{self.startdate} - {self.enddate}'
+        return f'{self.date}'
     
     class Meta:
-        ordering = ['-startdate']
+        ordering = ['-date']
 
 class Photo(models.Model):
     url = models.CharField(max_length=200)

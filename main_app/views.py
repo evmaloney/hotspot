@@ -5,11 +5,12 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Spot, Feature
+from .models import Spot, Feature, Photo
 from .forms import BookingForm
 import uuid
 import boto3
 import os
+
 
 
 # Create your views here.
@@ -19,10 +20,12 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
+@login_required
 def spots_index(request):
   spots = Spot.objects.filter(user=request.user)
   return render(request, 'spots/index.html', {'spots': spots})
 
+@login_required
 def spots_detail(request, spot_id):
   if request.user.spot_set.filter(id=spot_id).exists():
     spot = Spot.objects.get(id=spot_id)
@@ -36,6 +39,7 @@ def spots_detail(request, spot_id):
   else:
     return redirect('index')
 
+@login_required
 def add_booking(request, spot_id):
   # create a ModelForm instance using the data in request.POST
   form = BookingForm(request.POST)
@@ -47,9 +51,31 @@ def add_booking(request, spot_id):
     new_booking.save()
   return redirect('detail', spot_id=spot_id)
 
+@login_required
 def assoc_feature(request, spot_id, feature_id):
   # Note that you can pass a feature's id instead of the whole feature object
   Spot.objects.get(id=spot_id).features.add(feature_id)
+  return redirect('detail', spot_id=spot_id)
+
+@login_required
+def add_photo(request, spot_id):
+  # photo-file will be the "name" attribute on the <input type="file">
+  photo_file = request.FILES.get('photo-file', None)
+  print(photo_file)
+  if photo_file:
+    s3 = boto3.client('s3')
+    #need a unique key for s3 & needs image file extension too
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    # in case something goes wrong
+    try:
+      bucket = os.environ['S3_BUCKET']
+      s3.upload_fileobj(photo_file, bucket, key)
+      # build the full url string
+      url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+      # we can assign to spot_id or spot (if you have a spot object)
+      Photo.objects.create(url=url, spot_id=spot_id)
+    except:
+      print('An error occurred uplaoding file to S3')
   return redirect('detail', spot_id=spot_id)
 
 def signup(request):

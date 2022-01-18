@@ -51,8 +51,8 @@
       <tbody>
         {% for booking in spot.booking_set.all %}
         <tr>
-          <td>{{booking.startdate}}</td>
-          <td>{{booking.enddate}}</td>
+          <td>{{booking.date}}</td>
+          <td>{{booking.date}}</td>
         </tr>
         {% endfor %}
       </tbody>

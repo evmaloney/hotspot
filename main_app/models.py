@@ -48,10 +48,10 @@ class Booking(models.Model):
     class Meta:
         ordering = ['-startdate']
 
-# class Photo(models.Model):
-#     url = models.CharField(max_length=200)
-#     spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
 
-#     def __str__(self):
-#         return f"Photo for spot_id: {self.spot_id} @{self.url}"
+    def __str__(self):
+        return f"Photo for spot_id: {self.spot_id} @{self.url}"
         

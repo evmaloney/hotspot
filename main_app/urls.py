@@ -16,7 +16,7 @@ urlpatterns = [
   path('features/<int:pk>/update/', views.FeatureUpdate.as_view(), name='features_update'),
   path('features/<int:pk>/delete/', views.FeatureDelete.as_view(), name='features_delete'),
   path('spots/<int:spot_id>/assoc_feature/<int:feature_id>/', views.assoc_feature, name='assoc_feature'),
-  # path('spots/<int:spot_id>/add_photo/', views.add_photo, name='add_photo'),
+  path('spots/<int:spot_id>/add_photo/', views.add_photo, name='add_photo'),
   path('accounts/signup/', views.signup, name='signup'),
 ]
 

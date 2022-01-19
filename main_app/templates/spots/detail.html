@@ -102,4 +102,19 @@
   </div>
 </div>
 
+<script>
+  // This JS is used to initialize materialize's datepicker input
+  const dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+
+  // THis JS is used to initialize materialize's select input tag 
+  // const selectEl = document.getElementById('id_type');
+  // M.FormSelect.init(selectEl);
+</script>
+
 {% endblock %}

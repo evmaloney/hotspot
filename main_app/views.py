@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Spot, Feature, Photo
+from .models import Spot, Feature, Photo, Booking
 from .forms import BookingForm
 import uuid
 import boto3
@@ -48,7 +48,8 @@ def add_booking(request, spot_id):
     # don't save the form to th db until it has the cat_id assigned to it
     new_booking = form.save(commit=False)
     new_booking.spot_id = spot_id
-    new_booking.save()
+    if (Booking.objects.filter(date=new_booking.date).exists() == False):
+      new_booking.save()
   return redirect('detail', spot_id=spot_id)
 
 @login_required

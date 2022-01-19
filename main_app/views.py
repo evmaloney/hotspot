@@ -22,7 +22,7 @@ def about(request):
 
 @login_required
 def spots_index(request):
-  spots = Spot.objects.filter(user=request.user)
+  spots = Spot.objects.all()
   return render(request, 'spots/index.html', {'spots': spots})
 
 @login_required

@@ -26,6 +26,11 @@ def spots_index(request):
   return render(request, 'spots/index.html', {'spots': spots})
 
 @login_required
+def myspots_index(request, user_id):
+  spots = Spot.objects.filter(user_id=request.user.id)
+  return render(request, 'spots/myindex.html', {'spots': spots})
+
+@login_required
 def spots_detail(request, spot_id):
   spot = Spot.objects.get(id=spot_id)
   features_spot_doesnt_have = Feature.objects.exclude(id__in = spot.features.all().values_list('id'))
@@ -47,7 +52,7 @@ def add_booking(request, spot_id):
     new_booking = form.save(commit=False)
     new_booking.spot_id = spot_id
     if (Booking.objects.filter(spot_id=spot_id).filter(date=new_booking.date).exists() == False) and (spot.user == request.user):
-      print(request.user)
+      print(request.user.id)
       new_booking.save()
   return redirect('detail', spot_id=spot_id)
 

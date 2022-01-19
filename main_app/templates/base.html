@@ -18,29 +18,31 @@
     <nav>
       <div class="nav-wrapper blue darken-3">
         <ul>
-          <li><a href="{% url 'home' %}" class="center brand-logo">&nbsp;&nbsp;HotSpot</a></li>
+          <li><a href="{% url 'home' %}" class="center brand-logo">&nbsp;&nbsp;HotSpot&nbsp;&nbsp;</a></li>
         </ul>
-        <ul class="left">
-          <li><a href="{% url 'about' %}">About HotSpot</a></li>
+        <ul>
+          <li class="right"><a href="{% url 'about' %}">About</a></li>
           {% if user.is_authenticated %}
+            <li><a href="{% url 'spots_create' %}">List a Parking Spot</a></li>
+            <li><a href="{% url 'index' %}">Find Parking Spots</a></li>
             <li><a href="{% url 'features_create' %}">Add a Feature</a></li>
             <li><a href="{% url 'features_index' %}">View All Features</a></li>
-            <li><a href="{% url 'spots_create' %}">Add a Parking Spot</a></li>
-            <li><a href="{% url 'index' %}">View All Parking Spots</a></li>
-        </ul>
-        <ul class="right">
-            <li><a href="{% url 'logout' %}">Log Out</a></li>
+            <li class="right"><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
-            <li><a href="{% url 'signup' %}">Sign Up</a></li>
-            <li><a href="{% url 'login' %}">Log In</a></li>
+            <ul class="right">
+              <li><a href="{% url 'signup' %}">Sign Up</a></li>
+              <li><a href="{% url 'login' %}">Log In</a></li>
+            </ul>
           {% endif %}
         </ul>  
       </div>
     </nav>
   </header>
   <main class="blue-grey lighten-5">
-    {% block content %}
-    {% endblock %}
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
   </main>
   <footer class="page-footer blue darken-3">
     <div class="right nav-foot-text">All Rights Reserved, &copy; 2022 HotSpot - by Arevmo &nbsp;</div>

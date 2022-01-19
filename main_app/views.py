@@ -27,20 +27,18 @@ def spots_index(request):
 
 @login_required
 def spots_detail(request, spot_id):
-  if request.user.spot_set.filter(id=spot_id).exists():
-    spot = Spot.objects.get(id=spot_id)
-    features_spot_doesnt_have = Feature.objects.exclude(id__in = spot.features.all().values_list('id'))
-    # instantiate BookingForm to be rendered in the template
-    booking_form = BookingForm()
-    return render(request, 'spots/detail.html', {
-      'spot': spot, 'booking_form': booking_form,
-      'features': features_spot_doesnt_have
-    })
-  else:
-    return redirect('index')
+  spot = Spot.objects.get(id=spot_id)
+  features_spot_doesnt_have = Feature.objects.exclude(id__in = spot.features.all().values_list('id'))
+  # instantiate BookingForm to be rendered in the template
+  booking_form = BookingForm()
+  return render(request, 'spots/detail.html', {
+    'spot': spot, 'booking_form': booking_form,
+    'features': features_spot_doesnt_have
+  })
 
 @login_required
 def add_booking(request, spot_id):
+  spot = Spot.objects.get(id=spot_id)
   # create a ModelForm instance using the data in request.POST
   form = BookingForm(request.POST)
   # Validate the form!
@@ -48,7 +46,8 @@ def add_booking(request, spot_id):
     # don't save the form to th db until it has the cat_id assigned to it
     new_booking = form.save(commit=False)
     new_booking.spot_id = spot_id
-    if (Booking.objects.filter(date=new_booking.date).exists() == False):
+    if (Booking.objects.filter(spot_id=spot_id).filter(date=new_booking.date).exists() == False) and (spot.user == request.user):
+      print(request.user)
       new_booking.save()
   return redirect('detail', spot_id=spot_id)
 

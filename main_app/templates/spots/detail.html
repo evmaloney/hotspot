@@ -58,10 +58,38 @@
         <div class="card-content">
           <!-- <span class="card-title">
             {{ feature.name }}
-          </span> -->      
-          <label>EV Charging
-            <input type="checkbox" value="evCharging">
-          </label>
+          </span>-->
+          <form action="#">
+            <p>
+              <label>
+                <input type="checkbox">
+                <span>EV Charging</span>
+              </label>
+              <label>
+                <input type="checkbox">
+                <span>Carport/Covered</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox">
+                <span>Video Surveillance</span>
+              </label>
+              <label>
+                <input type="checkbox">
+                <span>Lighted</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox">
+                <span>Gated</span>
+              </label>
+              <label>
+                <input type="checkbox">
+                <span>Hadicapped Parking</span>
+              </label>
+            </p>
         </div>
         <div class="card-action">
           <form action="{% url 'assoc_feature' spot.id feature.id %}" method="POST">

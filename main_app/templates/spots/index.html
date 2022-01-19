@@ -1,23 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Parking Spot List</h1>
+    
+<a href="{% url 'myindex' user.id %}" class="waves-effect waves-light btn right">MySpots</a>
+<h2> Parking Spot List </h2> 
 
 {% for spot in spots %}
-  <div class="card">
-    <a href="{% url 'detail' spot.id %}">
-      <div class="card-content">
-        <span class="card-title">{{ spot.address }}</span>
-        <p>Type: {{ spot.type }}</p>
-        <p>Price: {{ spot.price }}</p>
-        {% comment %} {% if spot.age > 0 %}
-          <p>Age: {{ spot.age }}</p>
-        {% else %}
-          <p></p>
-        {% endif %} {% endcomment %}
+<div class="row">
+    <div class="col s12 m7">
+      <div class="card">
+        <div class="card-image">
+      {% for photo in spot.photo_set.all %}
+          <img class="responsive-img" src="{{photo.url}}">
+      {% endfor %}
+        </div>
+        <a href="{% url 'detail' spot.id %}">
+        <div class="card-content">
+          <span class="card-title">{{spot.address}}</span>
+        </a>
+        </div>
+        <div class="card-action">
+          <p>Type: {{ spot.type }}</p>
+          <p>Price: {{ spot.price }}</p>
+        </div>
       </div>
-    </a>
+    </div>
   </div>
 {% endfor %}
+
 
 {% endblock %}

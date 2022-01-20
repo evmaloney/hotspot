@@ -54,6 +54,7 @@ def add_booking(request, spot_id):
     if (Booking.objects.filter(spot_id=spot_id).filter(date=new_booking.date).exists() == False) and (spot.user == request.user):
       print(request.user.id)
       new_booking.save()
+      print(new_booking.id)
   return redirect('detail', spot_id=spot_id)
 
 @login_required

@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Parking Spot List</h1>
+<h2>My Listings</h2>
 
-<a href="{% url 'index' %}">All Listings</a>
+<a href="{% url 'index' %}" class="waves-effect waves-light btn">All Listings</a>
 
 {% for spot in spots %}
   <div class="card">
@@ -12,11 +12,6 @@
         <span class="card-title">{{ spot.address }}</span>
         <p>Type: {{ spot.type }}</p>
         <p>Price: {{ spot.price }}</p>
-        {% comment %} {% if spot.age > 0 %}
-          <p>Age: {{ spot.age }}</p>
-        {% else %}
-          <p></p>
-        {% endif %} {% endcomment %}
       </div>
     </a>
   </div>

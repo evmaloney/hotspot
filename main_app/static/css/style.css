@@ -20,5 +20,10 @@ nav {
 .card-image{
   display: flex;
   align-items: center;
-  height: 400px;
+  height: 100%;
+}
+
+.responsive-img {
+  max-width: 100%;
+  max-height: 100%;
 }

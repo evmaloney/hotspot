@@ -3,12 +3,12 @@
 
     
 <a href="{% url 'myindex' user.id %}" class="waves-effect waves-light btn right">MySpots</a>
-<h2> Parking Spot List </h2> 
+<h2> All Spots</h2> 
 
-{% for spot in spots %}
 <div class="row">
-    <div class="col s12 m7">
-      <div class="card">
+  {% for spot in spots %}
+    <div class="col s6 m6 l6">
+      <div class="card large">
         <div class="card-image">
       {% for photo in spot.photo_set.all %}
           <img class="responsive-img" src="{{photo.url}}">
@@ -25,8 +25,8 @@
         </div>
       </div>
     </div>
+  {% endfor %}
   </div>
-{% endfor %}
 
 
 {% endblock %}

@@ -50,28 +50,37 @@
       <h5>No Available Features :(</h5>
       {% endif %}
     </div>
-    <div>
-      <h3 class="center">Add Features</h3>
-      {% if features.count %}
-      {% for feature in features.all %}
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">
-            {{ feature.name }}
-          </span>
+    {% if spot.user == request.user %}
+      <div>
+        <h3 class="center">Add Features</h3>
+        {% if features.count %}
+        {% for feature in features.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              {{ feature.name }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_feature' spot.id feature.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
         </div>
-        <div class="card-action">
-          <form action="{% url 'assoc_feature' spot.id feature.id %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn">Add</button>
-          </form>
-        </div>
+        {% endfor %}
+        {% else %}
+        <h5>{{spot.address}} Already Has All Features Available</h5>
+        {% endif %}
+        <button class="btn"><a style="color:white" href="{% url 'features_index' %}">Add a Feature</a></button>
       </div>
-      {% endfor %}
-      {% else %}
-      <h5>{{spot.address}} Already Has All Features Available</h5>
-      {% endif %}
-    </div>
+    {% endif %}
+  </div>
+</div>
+
+<hr>
+<div class="row">
+  <div class="col s6">
     {% if spot.user == request.user %}
     <form method="POST" action="{% url 'add_booking' spot.id %}">
       {% csrf_token %}
@@ -85,18 +94,18 @@
     {% else %}
     <div class="card-panel red-text center-align">{{spot.address}} Available!</div>
     {% endif %} {% endcomment %}
-    <table class="striped">
+    <table class="center">
       <thead>
         <tr>
-          <th>Booked From</th>
-          <th>Booked Until</th>
+          <th>Date</th>
+          <th>Availability</th>
         </tr>
       </thead>
       <tbody>
         {% for booking in spot.booking_set.all %}
         <tr>
           <td>{{booking.date}}</td>
-          <td>{{booking.date}}</td>
+          <td><input onclick="change()" type="button" class="btn" value="Available" id="1"></input></td>
         </tr>
         {% endfor %}
       </tbody>
@@ -114,6 +123,13 @@
     autoClose: true
   }); 
 
+  function change() 
+  {
+    // alert("{{booking.id}}")
+    var elem = document.getElementById("1");
+    if (elem.value=="Available") elem.value = "{{request.user}}";
+    else elem.value = "Available";
+  }
   // THis JS is used to initialize materialize's select input tag 
   // const selectEl = document.getElementById('id_type');
   // M.FormSelect.init(selectEl);

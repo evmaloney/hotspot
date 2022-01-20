@@ -10,6 +10,9 @@
   <title>HotSpot</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 
@@ -18,7 +21,7 @@
     <nav>
       <div class="nav-wrapper blue darken-3">
         <ul>
-          <li><a href="{% url 'home' %}" class="center brand-logo">&nbsp;&nbsp;HotSpot&nbsp;&nbsp;</a></li>
+          <li><a href="{% url 'home' %}" class="center brand-logo logo-style">&nbsp;&nbsp;HotSpot&nbsp;&nbsp;</a></li>
         </ul>
         <ul>
           <li class="right"><a href="{% url 'about' %}">About</a></li>

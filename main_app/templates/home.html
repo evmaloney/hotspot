@@ -1,6 +1,56 @@
-{% extends 'base.html' %}
-{% block content %}
+{% load static %}
 
-  <h1>Home</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-{% endblock %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>HotSpot</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body>
+  <header class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper blue darken-3">
+        <ul>
+          <li><a href="{% url 'home' %}" class="center brand-logo logo-style">&nbsp;&nbsp;HotSpot&nbsp;&nbsp;</a></li>
+        </ul>
+        <ul>
+          <li class="right"><a href="{% url 'about' %}">About</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'spots_create' %}">List a Spot</a></li>
+            <li><a href="{% url 'index' %}">Find a Spot</a></li>
+            <!-- <li><a href="{% url 'features_create' %}">Add a Feature</a></li> -->
+            <!-- <li><a href="{% url 'features_index' %}">View All Features</a></li> -->
+            <li class="right"><a href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+            <ul class="right">
+              <li><a href="{% url 'signup' %}">Sign Up</a></li>
+              <li><a href="{% url 'login' %}">Log In</a></li>
+            </ul>
+          {% endif %}
+        </ul>  
+      </div>
+    </nav>
+  </header>
+  <main class="background-img">
+    <div class="container">
+      <h1 class="center home-title logo-style">HotSpot</h1>
+    </div>
+    <div class="home-div-content center">
+      <h3 class="center homefont-style">you've found</h3>
+      <h3 class="center homefont-style">a place</h3>
+      <h3 class="center homefont-style">to park</h3>
+    </div>
+  </main>
+  <footer class="page-footer blue darken-3">
+    <div class="right nav-foot-text">All Rights Reserved, &copy; 2022 HotSpot - by Arevmo &nbsp;</div>
+  </footer>
+</body>
+
+</html>

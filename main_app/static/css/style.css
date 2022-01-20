@@ -13,11 +13,34 @@ footer.page-footer {
   text-align: right;
 }
 
-nav {
-  color: red;
+.background-img {
+  background-image: url('https://free-images.com/lg/9f83/cars_vehicles_street_parking.jpg');
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.card-image{
+.logo-style {
+  font-weight: 500;
+  font-family: 'Roboto Slab', serif;
+}
+
+.homefont-style {
+  font-weight: 200;
+}
+
+.home-title {
+  margin-top: 70px;
+}
+
+.home-div-content {
+  position: absolute;
+  width: 100%;
+  bottom: 15px;
+}
+
+.card-image {
   display: flex;
   align-items: center;
   height: 100%;

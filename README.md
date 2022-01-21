@@ -3,9 +3,9 @@
 This project is a web application used to list and book parking spots. Users are able to list a parking spot which they own as well as provide details on the spot such as address, type, price, and features. Another user will then be able to book the spot based on a particular date. 
 
 ## Screenshots
-![This is an image]
-![This is an image]
-![This is an image]
+![This is an image](main_app/static/imgs/home.png) 
+![This is an image](main_app/static/imgs/index.png) 
+![This is an image](main_app/static/imgs/detail.png) 
 
 ## Technologies Used
 * HTML

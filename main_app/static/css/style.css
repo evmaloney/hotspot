@@ -52,8 +52,7 @@ footer.page-footer {
 }
 
 .btn-change {
-  border-radius: 50%;
-  background-color: #ff7043;
-  color: #0277bd;
-  font-size:larger;
+  border-radius: 30px;
+  background-color: #00838f ;
+  font-size: larger;
 }

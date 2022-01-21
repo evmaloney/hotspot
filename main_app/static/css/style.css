@@ -56,3 +56,9 @@ footer.page-footer {
   background-color: #00838f ;
   font-size: larger;
 }
+
+.card-change {
+  border: 5px solid #1565c0;
+  border-radius: 20px;
+  background: #cfd8dc;
+}

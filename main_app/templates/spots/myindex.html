@@ -8,7 +8,7 @@
 <div class="row">
 {% for spot in spots %}
 <div class="col s6 m6 l6">
-  <div class="card">
+  <div class="card card-change">
     <a href="{% url 'detail' spot.id %}">
       <div class="card-content">
         <span class="card-title">{{ spot.address }}</span>

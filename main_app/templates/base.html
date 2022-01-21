@@ -28,8 +28,6 @@
           {% if user.is_authenticated %}
             <li><a href="{% url 'spots_create' %}">List a Spot</a></li>
             <li><a href="{% url 'index' %}">Find a Spot</a></li>
-            <!-- <li><a href="{% url 'features_create' %}">Add a Feature</a></li> -->
-            <!-- <li><a href="{% url 'features_index' %}">View All Features</a></li> -->
             <li class="right"><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
             <ul class="right">

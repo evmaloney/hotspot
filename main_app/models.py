@@ -3,14 +3,6 @@ from django.urls import reverse
 from datetime import date
 from django.contrib.auth.models import User
 
-# TYPES = (
-#     ('Driveway', 'Driveway'),
-#     ('Lot', 'Lot'),
-#     ('Garage', 'Garage'),
-#     ('Street', 'Street'),
-#     ('Other', 'Other')
-# )
-
 
 class Feature(models.Model):
     name = models.CharField(max_length=100)
@@ -42,7 +34,6 @@ class Spot(models.Model):
 class Booking(models.Model):
     date = models.DateField('date')
     spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.date}'

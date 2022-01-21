@@ -47,13 +47,11 @@ def add_booking(request, spot_id):
   form = BookingForm(request.POST)
   # Validate the form!
   if form.is_valid():
-    # don't save the form to th db until it has the cat_id assigned to it
+    # don't save the form to the db until it has the spot_id assigned to it
     new_booking = form.save(commit=False)
     new_booking.spot_id = spot_id
     if (Booking.objects.filter(spot_id=spot_id).filter(date=new_booking.date).exists() == False) and (spot.user == request.user):
-      print(request.user.id)
       new_booking.save()
-      print(new_booking.id)
   return redirect('detail', spot_id=spot_id)
 
 @login_required
@@ -66,7 +64,6 @@ def assoc_feature(request, spot_id, feature_id):
 def add_photo(request, spot_id):
   # photo-file will be the "name" attribute on the <input type="file">
   photo_file = request.FILES.get('photo-file', None)
-  print(photo_file)
   if photo_file:
     s3 = boto3.client('s3')
     #need a unique key for s3 & needs image file extension too
@@ -105,20 +102,18 @@ def signup(request):
 # Class-Based views
 class SpotCreate(LoginRequiredMixin, CreateView):
   model = Spot
-  # fields = '__all__'
-  # success_url = '/spots/'
   fields = ['address', 'type', 'price', 'description']
 
-  # this inherited is called when a valid cat form is being submitted
+  # this inherited is called when a valid spot form is being submitted
   def form_valid(self, form):
     # Assign the logged in user (self.request.user)
-    form.instance.user = self.request.user  # form.instance is the cat
+    form.instance.user = self.request.user  # form.instance is the spot
     # Let the CreateView do its job as usual
     return super().form_valid(form)
 
 class SpotUpdate(LoginRequiredMixin, UpdateView):
   model = Spot
-  # Let's dissallow the renaming of a cat by excluding the name field!
+  # Let's dissallow the renaming of a spot by excluding the name field!
   fields = ['type', 'price', 'description']
 
 class SpotDelete(LoginRequiredMixin, DeleteView):

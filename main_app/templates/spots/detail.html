@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1 class="center">{{ spot.address }}</h1>
-
+<br><br>
 <div class="row">
-  <div class="col s6">
+  <div class="col s6 m6 l6">
     <div class="card">
       <div class="card-content">
         <span class="card-title">{{ spot.address }}</span>
@@ -29,13 +28,13 @@
       {% csrf_token %}
       <input type="file" name="photo-file">
       <br><br>
-      <input type="submit" class="btn" value="Upload Photo">
+      <input type="submit" class="btn btn-change" value="Upload Photo">
     </form>
     {% endif %}
   </div>
-  <div class="col s6">
-    <div>
-      <h3 class="center">Parking Spot Features</h3>
+  <div class="col s6 m6 l6">
+    <div class="center">
+      <h3 class="center logo-style">Features</h3>
       {% if spot.features.count %}
       {% for feature in spot.features.all %}
       <div class="card">
@@ -47,32 +46,34 @@
       </div>
       {% endfor %}
       {% else %}
-      <h5>No Available Features :(</h5>
+      <h5>No Added Features</h5>
       {% endif %}
     </div>
     {% if spot.user == request.user %}
       <div>
-        <h3 class="center">Add Features</h3>
+        <h3 class="center logo-style">Add Features</h3>
         {% if features.count %}
         {% for feature in features.all %}
         <div class="card">
-          <div class="card-content">
+          <div class="card-content center">
             <span class="card-title">
               {{ feature.name }}
             </span>
           </div>
-          <div class="card-action">
+          <div class="card-action center">
             <form action="{% url 'assoc_feature' spot.id feature.id %}" method="POST">
               {% csrf_token %}
-              <button type="submit" class="btn">Add</button>
+              <button type="submit" class="btn btn-change">Add</button>
             </form>
           </div>
         </div>
         {% endfor %}
         {% else %}
-        <h5>{{spot.address}} Already Has All Features Available</h5>
+        <h5 class="center logo-style">Already Has All Features Available</h5>
         {% endif %}
-        <button class="btn"><a style="color:white" href="{% url 'features_index' %}">Add a Feature</a></button>
+        <div class="center">
+        <button class="btn btn-change center"><a class="center" style="color:white" href="{% url 'features_index' %}">Add a Feature</a></button>
+        </div>
       </div>
     {% endif %}
   </div>
@@ -85,15 +86,10 @@
     <form method="POST" action="{% url 'add_booking' spot.id %}">
       {% csrf_token %}
       {{ booking_form.as_p }}
-      <input type="submit" class="btn" value="Add Booking">
+      <input type="submit" class="btn btn-change" value="Add Booking">
     </form>
     {% endif %}
     <br>
-    {% comment %} {% if spot.booked_for_today %}
-    <div class="card-panel teal-text center-align">{{spot.address}} Has been booked for today</div>
-    {% else %}
-    <div class="card-panel red-text center-align">{{spot.address}} Available!</div>
-    {% endif %} {% endcomment %}
     <table class="center">
       <thead>
         <tr>
@@ -105,7 +101,7 @@
         {% for booking in spot.booking_set.all %}
         <tr>
           <td>{{booking.date}}</td>
-          <td><input onclick="change()" type="button" class="btn" value="Available" id="1"></input></td>
+          <td><input onclick="change()" type="button" class="btn btn-change" value="Available" id="1"></input></td>
         </tr>
         {% endfor %}
       </tbody>
@@ -130,9 +126,5 @@
     if (elem.value=="Available") elem.value = "{{request.user}}";
     else elem.value = "Available";
   }
-  // THis JS is used to initialize materialize's select input tag 
-  // const selectEl = document.getElementById('id_type');
-  // M.FormSelect.init(selectEl);
-</script>
 
 {% endblock %}

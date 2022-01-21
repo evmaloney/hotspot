@@ -8,13 +8,12 @@
   <div class="card">
     <div class="card-content">
       <span class="card-title">{{ feature.name }}</span>
-      {% comment %} <p>Color: {{ toy.color }}</p> {% endcomment %}
     </div>
   </div>
 </a>
 {% endfor %}
 
 
-<button class="btn"><a style="color:white" href="{% url 'features_create' %}">Create a Feature</a></button>
+<button class="btn btn-change"><a style="color:white" href="{% url 'features_create' %}">Create a Feature</a></button>
 
 {% endblock %}

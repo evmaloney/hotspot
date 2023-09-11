@@ -19,7 +19,7 @@ This project is a web application used to list and book parking spots. Users are
 ## Getting Started
 [Trello Board](https://trello.com/b/0gD9WSRL/arevmo)
 
-[Launch App](https://hotspot-sei-dtla.herokuapp.com/) 
+[Launch App](https://hotspot-spaces-8d1cc6559225.herokuapp.com/) 
 
 
 ## Next Steps 
